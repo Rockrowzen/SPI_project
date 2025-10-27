@@ -1,11 +1,12 @@
-module spi_master (
+module spi_master(
     input  wire clk,          // System clock
     input  wire reset,
     input  wire start,        // Start transmission
-    input  wire [7:0] data_in,
-    input  wire miso,         // Master In (from slave)
-    output reg  mosi,         // Master Out
+    input  wire en,
+    input  wire [7:0] data_in,// 8-bit data input 
+    input  wire miso,         // Master In Slave out
+    output reg  mosi,         // Master Out Slave in 
     output reg  sclk,         // SPI clock
     output reg  ss,           // Slave Select (active low)
-    output reg  done
+    output reg  [7:0] data_out
 );
