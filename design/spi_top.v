@@ -11,19 +11,24 @@ module spi_top (
     output wire [7:0] slave1_data_out,
     output wire [7:0] slave2_data_out,
     output wire [7:0] master_rx,
-    output wire done
-);
+        output wire done,
 
-    wire mosi;
-    wire sclk;
-    wire cs0, cs1, cs2;
+    // ? Expose SPI signals for waveform viewing
+    output wire mosi,
+    output wire miso,
+    output wire sclk,
+    output wire cs0,
+    output wire cs1,
+    output wire cs2
+);
     
     wire miso0, miso1, miso2;
     
-    wire miso;
-    assign miso = (!cs0) ? miso0 :
-                  (!cs1) ? miso1 :
-                  (!cs2) ? miso2 : 1'b0;
+   assign miso = (!cs0) ? miso0 :
+               (!cs1) ? miso1 :
+               (!cs2) ? miso2 :
+               1'bz;   // high impedance when no slave selected
+
     
     wire en = 1'b1;
     
